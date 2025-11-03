@@ -13,6 +13,8 @@ class Users(models.Models):
 
 
 class Notes(models.Models):
+
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -22,6 +24,7 @@ class Notes(models.Models):
         return self.title
 
 class Tasks(models.Models):
+    User = models.ForeignKey(Users, on_delete=models.CASCADE)
     task_name = models.CharField(max_length=200)
     is_completed = models.BooleanField(default=False)
     due_date = models.DateTimeField(blank=True, null=True)
