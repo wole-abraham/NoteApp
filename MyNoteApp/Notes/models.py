@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Users(models.Models):
+class Users(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     username = models.CharField(max_length=150, unique=True)
@@ -12,7 +12,7 @@ class Users(models.Models):
         return self.username
 
 
-class Notes(models.Models):
+class Notes(models.Model):
 
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -23,7 +23,7 @@ class Notes(models.Models):
     def __str__(self):
         return self.title
 
-class Tasks(models.Models):
+class Tasks(models.Model):
     User = models.ForeignKey(Users, on_delete=models.CASCADE)
     task_name = models.CharField(max_length=200)
     is_completed = models.BooleanField(default=False)
