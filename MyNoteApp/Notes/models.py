@@ -15,6 +15,7 @@ class Users(models.Model):
 class Notes(models.Model):
 
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -34,3 +35,5 @@ class Tasks(models.Model):
     
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=18)
