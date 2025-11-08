@@ -1,21 +1,25 @@
 from django.db import models
-
+from django.contrib.auth import get_user_model
 # Create your models here.
-class Users(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    username = models.CharField(max_length=150, unique=True)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=128)
+# class Users(models.Model):
+#     first_name = models.CharField(max_length=30)
+#     last_name = models.CharField(max_length=30)
+#     username = models.CharField(max_length=150, unique=True)
+#     email = models.EmailField(unique=True)
+#     password = models.CharField(max_length=128)
 
-    def __str__(self):
-        return self.username
+#     def __str__(self):
+#         return self.username
+
+#     def fullname(self):
+#         return self.first_name, self.last_name
+
 
 
 class Notes(models.Model):
 
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null=True)
     title = models.CharField(max_length=200)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -25,7 +29,7 @@ class Notes(models.Model):
         return self.title
 
 class Tasks(models.Model):
-    User = models.ForeignKey(Users, on_delete=models.CASCADE)
+    User = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     task_name = models.CharField(max_length=200)
     is_completed = models.BooleanField(default=False)
     due_date = models.DateTimeField(blank=True, null=True)
@@ -37,3 +41,8 @@ class Tasks(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=18)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+

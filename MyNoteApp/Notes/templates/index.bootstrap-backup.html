@@ -64,30 +64,60 @@
   </section>
   </div>
 
- 
+  <section class="grid" id="notesGrid">
     <div class="row g-3">
           <!-- Cards generated in markup for simplicity -->
           <!-- Row 1 -->
-
-          {% for note in notes %}
           <div class="col-12 col-md-6 col-lg-3">
           <article class="card h-100" data-category="projects">
-            <div class="card-date">{{ note.created_at }}</div>
-            <h3 class="card-title">{{ note.title }}</h3>
-            <p class="card-body">{{ note.content }}</p>
+            <div class="card-date">23 June, 2017</div>
+            <h3 class="card-title">The monkey-rope</h3>
+            <p class="card-body">Being the savage's bowsman, that is, the person who pulled the bow-oar.</p>
             <div class="meta">
-              <div class="tag"><span class="dot projects"></span>{{note.category}}</div>
+              <div class="tag"><span class="dot projects"></span>Projects</div>
               <div class="menu">⋯</div>
             </div>
           </article>
           </div>
-          {% endfor %}
 
-        
+          <div class="col-12 col-md-6 col-lg-3">
+          <article class="card h-100" data-category="business">
+            <div class="card-date">20 June, 2017</div>
+            <h3 class="card-title">Being the savage's bowsman</h3>
+            <p class="card-body">Short note: pulled the only one bow-oar.</p>
+            <div class="meta">
+              <div class="tag"><span class="dot business"></span>Business</div>
+              <div class="menu">⋯</div>
+            </div>
+          </article>
+          </div>
 
-      
+          <div class="col-12 col-md-6 col-lg-3">
+          <article class="card h-100" data-category="personal">
+            <div class="card-date">15 June, 2017</div>
+            <h3 class="card-title">The monkey-rope</h3>
+            <ul>
+              <li>Being the bowsman</li>
+              <li>The person who pulled the bow-oar</li>
+            </ul>
+            <div class="meta">
+              <div class="tag"><span class="dot personal"></span>Personal</div>
+              <div class="menu">⋯</div>
+            </div>
+          </article>
+          </div>
 
-        
+          <div class="col-12 col-md-6 col-lg-3">
+          <article class="card image h-100" data-category="projects">
+            <div class="card-date">10 June, 2017</div>
+            <h3 class="card-title">New workplace</h3>
+            <div class="thumb"></div>
+            <div class="meta">
+              <div class="tag"><span class="dot projects"></span>Projects</div>
+              <div class="menu">⋯</div>
+            </div>
+          </article>
+          </div>
 
           <!-- Row 2 -->
           <!-- <article class="card image" data-category="personal">
@@ -97,7 +127,8 @@
             <div class="meta">
               <div class="tag"><span class="dot personal"></span>Personal</div>
               <div class="menu">⋯</div>
-            </article>
+            </div>
+          </article>
 
           <article class="card" data-category="business">
             <div class="card-date">25 May, 2017</div>
@@ -150,7 +181,8 @@
             <div class="meta">
               <div class="tag"><span class="dot business"></span>Business</div>
               <div class="menu">⋯</div>
-            </article>
+            </div>
+          </article>
 
           <article class="card image" data-category="personal">
             <div class="card-date">1 May, 2017</div>
@@ -162,48 +194,10 @@
             </div>
           </article> -->
         </div>
-     
+        </section>
       </main>
     </div>
-      <!-- New Note Modal -->
-      <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <form id="noteForm" method="post"> 
-              {% csrf_token %}
-              <div class="modal-header">
-                <h5 class="modal-title" id="noteModalLabel">Add New Note</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div class="mb-3">
-                  <label for="noteTitle" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="noteTitle" name="title" required>
-                </div>
-                <div class="mb-3">
-                  <label for="noteContent" class="form-label">Content</label>
-                  <textarea class="form-control" id="noteContent" name="content" rows="4" required></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="noteCategory" class="form-label">Category</label>
-                  <select id="noteCategory" name="category" class="form-select" required>
-                    {% for cat in category %}
-                    <option value="{{cat.id}}">{{cat.name}}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <!-- Intentionally do nothing on click: keep as button (not submit) -->
-                <button type="submit" class="btn btn-primary" id="noteSaveBtn">Save</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div id="backdrop" class="backdrop" aria-hidden="true"></div>
+    <div id="backdrop" class="backdrop" aria-hidden="true"></div>
     <!-- Bootstrap JS bundle (optional, kept for component support) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>

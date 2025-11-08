@@ -77,5 +77,21 @@ document.addEventListener('DOMContentLoaded', ()=>{
   window.addEventListener('resize', ()=>{
     if(window.innerWidth > 900) closeSidebar();
   });
+  
+  // Initialize modal and open it when the Add (+) button is clicked.
+  // NOTE: The Save button is intentionally a no-op (type="button").
+  const addBtn = document.querySelector('.btn.add');
+  const noteModalEl = document.getElementById('noteModal');
+  if(addBtn && noteModalEl && typeof bootstrap !== 'undefined'){
+    const noteModal = new bootstrap.Modal(noteModalEl);
+    addBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      noteModal.show();
+    });
+  }
+  // on resize remove open state when switching to desktop
+  window.addEventListener('resize', ()=>{
+    if(window.innerWidth > 900) closeSidebar();
+  });
 });
 
