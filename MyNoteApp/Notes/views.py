@@ -18,10 +18,10 @@ def index(request):
             "notes": notes,
             "category": category
         })
-    else:
-        notes = Notes.objects.all()
-        category = Category.objects.all()
-        return render(request, "index.html", context={
-            "notes": notes,
-            "category": category
+   
+    notes = Notes.objects.all()
+    category = Category.objects.all()
+    return render(request, "index.html", context={
+        "notes": notes,
+        "category": category
         })
